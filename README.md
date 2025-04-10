@@ -6,6 +6,7 @@ A collection of minimal, yet powerful functions and macros to help with most usu
 
 Currently, `libchimp` features:
 
+- No heap allocations!
 - Better asserts
 	- Nice output when run in tests (with `-DTEST` compiler flag)
 - Assumes (soft asserts, return instead of crashing)
@@ -26,3 +27,10 @@ debug:
 release:
 	gcc -O3 -Wall -Wextra -Werror -s -DNDEBUG
 ```
+
+## TODO
+
+Remember to keep the scope small!
+
+- File content iterator (no memory allocations)
+- Tools for dealing with `system` and `popen` to run external programs and read their output
