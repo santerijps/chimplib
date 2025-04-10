@@ -19,11 +19,13 @@ struct Arena_Slice {
 };
 
 // Create a slice arena with offset set to 0.
+__attribute__((warn_unused_result))
 Slice_Arena slice_arena_create(
     uint8_t* const buffer,
     size_t const size
 ) {
     assert(buffer != NULL);
+    assert(size > 0);
     return (Slice_Arena) {
         .buffer = buffer,
         .size = size,
@@ -33,6 +35,7 @@ Slice_Arena slice_arena_create(
 
 // Align the pointer forward if needed.
 // Reference: https://www.gingerbill.org/article/2019/02/08/memory-allocation-strategies-002/
+__attribute__((warn_unused_result))
 uintptr_t slice_arena_align_forward(uintptr_t const pointer) {
     uintptr_t const alignment = (uintptr_t)(2 * sizeof(void*));
     uintptr_t const modulo = pointer & (alignment - 1);
@@ -46,6 +49,7 @@ uintptr_t slice_arena_align_forward(uintptr_t const pointer) {
 
 // Allocate memory in the arena.
 // If there's not enough memory, the pointer will be NULL.
+__attribute__((warn_unused_result))
 Arena_Slice slice_arena_alloc(
     Slice_Arena* const arena,
     size_t const size
@@ -62,7 +66,7 @@ Arena_Slice slice_arena_alloc(
     if (aligned_offset + size <= arena->size) {
         pointer = (void*)&arena->buffer[aligned_offset];
         arena->offset += size;
-        memset(pointer, 0, size);
+        assert(memset(pointer, 0, size) != NULL);
     }
 
     return (Arena_Slice) {
@@ -78,7 +82,7 @@ void slice_arena_clear(Slice_Arena* const arena) {
     assert(arena->buffer != NULL);
     assert(arena->offset < arena->size);
 
-    memset(arena->buffer, 0, arena->size);
+    assert(memset(arena->buffer, 0, arena->size) != NULL);
     arena->offset = 0;
 }
 

@@ -1,5 +1,5 @@
 MAKEFLAGS += --silent
-CFLAGS := gcc -Og -Wall -Wextra -Werror -DTEST -DNDEBUG
+CFLAGS := gcc -O2 -Wall -Wextra -Werror -DTEST -DNDEBUG
 
 test_all: build_all
 	./string_builder_test
