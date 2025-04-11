@@ -47,3 +47,4 @@ Remember to keep the scope small!
 
 - File content iterator (no memory allocations)
 - Tools for dealing with `system` and `popen` to run external programs and read their output
+- Header file for testing macros
