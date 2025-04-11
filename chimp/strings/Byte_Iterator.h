@@ -4,8 +4,8 @@
 #include <assert.h>
 #include <stdint.h>
 
-typedef struct Byte_Itrator_Position Byte_Itrator_Position;
-struct Byte_Itrator_Position {
+typedef struct Byte_Iterator_Position Byte_Iterator_Position;
+struct Byte_Iterator_Position {
     uint64_t offset;
     uint64_t line;
     uint64_t column;
@@ -16,12 +16,12 @@ struct Byte_Iterator {
     char* const string;
     size_t const length;
     uint64_t offset;
-    Byte_Itrator_Position position;
+    Byte_Iterator_Position position;
 };
 
-typedef struct Byte_Itrator_Result Byte_Itrator_Result;
-struct Byte_Itrator_Result {
-    Byte_Itrator_Position position;
+typedef struct Byte_Iterator_Result Byte_Iterator_Result;
+struct Byte_Iterator_Result {
+    Byte_Iterator_Position position;
     int byte;
 };
 
@@ -43,13 +43,13 @@ Byte_Iterator byte_iterator_create(
 
 // Read the next byte and increment the offset.
 __attribute__((warn_unused_result))
-Byte_Itrator_Result byte_iterator_next(Byte_Iterator* const iter) {
+Byte_Iterator_Result byte_iterator_next(Byte_Iterator* const iter) {
     assert(iter != NULL);
     assert(iter->string != NULL);
     assert(iter->length > 0);
     assert(iter->offset <= iter->length);
 
-    Byte_Itrator_Result result = {
+    Byte_Iterator_Result result = {
         .position = iter->position,
         .byte = 0,
     };
@@ -72,13 +72,13 @@ Byte_Itrator_Result byte_iterator_next(Byte_Iterator* const iter) {
 
 // Read the next byte but DO NOT increment the offset.
 __attribute__((warn_unused_result))
-Byte_Itrator_Result byte_iterator_peek(const Byte_Iterator* const iter) {
+Byte_Iterator_Result byte_iterator_peek(const Byte_Iterator* const iter) {
     assert(iter != NULL);
     assert(iter->string != NULL);
     assert(iter->length > 0);
     assert(iter->offset <= iter->length);
 
-    Byte_Itrator_Result result = {
+    Byte_Iterator_Result result = {
         .position = iter->position,
         .byte = 0,
     };
