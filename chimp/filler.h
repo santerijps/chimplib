@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+__attribute__((warn_unused_result))
 size_t fsize(FILE* const file) {
     size_t const offset = ftell(file);
     assert(fseek(file, 0, SEEK_END) == 0);
