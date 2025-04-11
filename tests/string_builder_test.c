@@ -1,4 +1,4 @@
-#include "../chimp/macros.h"
+#include "../chimp/testing.h"
 #include "../chimp/String_Builder.h"
 
 int test_create(void) {
@@ -45,10 +45,10 @@ int main(void) {
         + test_write_bytes()
         + test_write_string()
     );
-    if (failures > 0) {
-        errorf("Failed tests: %d\n", failures);
-    } else {
-        puts("\e[32mAll tests passed!\e[0m");
-    }
+    fprintf(
+        stderr,
+        __FILE__ " %sFailed tests: %d\n\e[0m",
+        failures ? "\e[31m" : "\e[32m", failures
+    );
     return 0;
 }

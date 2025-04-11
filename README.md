@@ -7,7 +7,7 @@ A collection of minimal, yet powerful functions and macros to help with most usu
 Currently, `libchimp` features:
 
 - Better asserts
-	- Nicer output when run in tests (with `-DTEST` compiler flag)
+- Testing utilities
 - `assume` and `assumef` (soft assert, return instead of crashing)
 - `errorf`, `panicf`, `unreachable` macros and more!
 - Shorthand types (`i32`, `f64`, etc.)
@@ -44,10 +44,10 @@ Change `clangd` features by having a `.clangd` file in the root of your project:
 ```yaml
 CompileFlags:
     Add:
-        - "-Ichimplib" # Add includes
+        - "-Ichimplib" # Add chimplib to search path
 Diagnostics:
     Suppress:
-		- some clangd warning # Suppress warnings
+		- misc-definitions-in-headers # Suppress warnings
 ```
 
 ### Compilation flags
@@ -55,8 +55,6 @@ Diagnostics:
 It's recommended to compile your programs with the following flags:
 
 ```Makefile
-test:
-	gcc -O2 -Wall -Wextra -DTEST
 debug:
 	gcc -Og -Wall -Wextra
 release:
