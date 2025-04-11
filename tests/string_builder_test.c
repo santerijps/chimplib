@@ -1,5 +1,5 @@
 #include "../chimp/testing.h"
-#include "../chimp/String_Builder.h"
+#include "../chimp/strings/String_Builder.h"
 
 int test_create(void) {
     char buffer[3] = {0};
