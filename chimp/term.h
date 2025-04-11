@@ -24,6 +24,7 @@
                     TERMS_ITALIC
                 TERMS_GRAPHICS_END
                 "What's up?\n"
+                TERMS_GRAPHICS_RESET
             );
 
         This is not required if you use the printing macros provided in this file.
