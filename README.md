@@ -26,12 +26,31 @@ There are a few ways you might want to use this library:
 
 - Copy-paste the code, there are no dependencies!
 - Download the file you need and then include it in your project
-- Add git submodule
+- In your project directory:
 	1. `git submodule add https://github.com/santerijps/chimplib`
-	2. Compile with the flag: `-Ichimplib/chimp`
+	2. Compile with the flag: `-Ichimplib`
 	3. Include in the source code: `#include <chimp/types.h>`
 
-## Compilation flags
+## Recommendations
+
+### Language server
+
+It's a good idea to utilize a language server in development.
+A great option for this is [`clangd`](https://clangd.llvm.org/),
+which is also available as a vscode extension.
+
+Change `clangd` features by having a `.clangd` file in the root of your project:
+
+```yaml
+CompileFlags:
+    Add:
+        - "-Ichimplib" # Add includes
+Diagnostics:
+    Suppress:
+		- some clangd warning # Suppress warnings
+```
+
+### Compilation flags
 
 It's recommended to compile your programs with the following flags:
 
