@@ -26,7 +26,10 @@ There are a few ways you might want to use this library:
 
 - Copy-paste the code, there are no dependencies!
 - Download the file you need and then include it in your project
-- `git submodule add https://github.com/santerijps/chimplib`
+- Add git submodule
+	1. `git submodule add https://github.com/santerijps/chimplib`
+	2. Compile with the flag: `-Ichimplib/chimp`
+	3. Include in the source code: `#include <chimp/types.h>`
 
 ## Compilation flags
 
