@@ -6,8 +6,8 @@
 #include <stdlib.h>
 
 #define fallthrough __attribute__((fallthrough))
-#define errorf(...) fprintf(stderr, ##__VA_ARGS__)
-#define exitf(code, ...) do { errorf(__VA_ARGS__); exit(code); } while (0)
+#define eprintf(...) fprintf(stderr, ##__VA_ARGS__)
+#define exitf(code, ...) do { eprintf(__VA_ARGS__); exit(code); } while (0)
 #define panicf(...) exitf(1, __VA_ARGS__)
 #define unreachable panicf("Uncreachable code detected\n")
 
