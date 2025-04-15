@@ -66,7 +66,7 @@ Arena_Slice slice_arena_alloc(
     if (aligned_offset + size <= arena->size) {
         pointer = (void*)&arena->buffer[aligned_offset];
         arena->offset += size;
-        assert(memset(pointer, 0, size) != NULL);
+        memset(pointer, 0, size);
     }
 
     return (Arena_Slice) {
@@ -82,7 +82,7 @@ void slice_arena_clear(Slice_Arena* const arena) {
     assert(arena->buffer != NULL);
     assert(arena->offset < arena->size);
 
-    assert(memset(arena->buffer, 0, arena->size) != NULL);
+    memset(arena->buffer, 0, arena->size);
     arena->offset = 0;
 }
 

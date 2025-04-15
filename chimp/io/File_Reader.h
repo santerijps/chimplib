@@ -169,7 +169,13 @@ char file_reader_peek(File_Reader* const reader) {
         return EOF;
     }
 
-    assert(file_reader_seek(reader, -1, SEEK_CUR) == 0);
+    reader->buffer_index = 0;
+    reader->buffer_length = 0;
+    reader->is_eof = 0;
+
+    if (file_reader_refresh(reader) == EOF) {
+        return EOF;
+    }
 
     return byte;
 }

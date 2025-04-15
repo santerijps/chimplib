@@ -14,9 +14,9 @@
 __attribute__((warn_unused_result))
 size_t fsize(FILE* const file) {
     size_t const offset = ftell(file);
-    assert(fseek(file, 0, SEEK_END) == 0);
+    fseek(file, 0, SEEK_END);
     size_t const size = ftell(file);
-    assert(fseek(file, offset, SEEK_SET) == 0);
+    fseek(file, offset, SEEK_SET);
     return size;
 }
 
