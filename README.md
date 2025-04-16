@@ -9,10 +9,11 @@ Currently, `libchimp` features:
 - Better asserts
 - Testing utilities
 - `assume` and `assumef` (soft assert, return instead of crashing)
-- `errorf`, `panicf`, `unreachable` macros and more!
+- `eprintf`, `panicf`, `unreachable` macros and more!
 - Shorthand types (`i32`, `f64`, etc.)
 - Arena allocator
 - String builder
+- More!
 
 ## Design decisions
 
@@ -30,6 +31,10 @@ There are a few ways you might want to use this library:
 	1. `git submodule add https://github.com/santerijps/chimplib`
 	2. Compile with the flag: `-Ichimplib`
 	3. Include in the source code: `#include <chimp/types.h>`
+
+## Documentation
+
+Learn how to use the functions by reading their source code or by [looking into the tests cases](./tests/)
 
 ## Recommendations
 
@@ -55,15 +60,23 @@ Diagnostics:
 It's recommended to compile your programs with the following flags:
 
 ```Makefile
+# Example Makefile
+MAKEFLAGS += --silent
+
+WARNINGS := -Wall -Wextra -Wshadow -Wformat=2 -Wnull-dereference -Wpedantic
+SAFETY := -fstack-protector -D_FORTIFY_SOURCE=2 -fno-strict-aliasing
+COMMON_FLAGS := $(WARNINGS) $(SAFETY) -std=c99
+
 debug:
-	gcc -Og -Wall -Wextra
+	gcc $(COMMON_FLAGS) -Og -g
 release:
-	gcc -O3 -Wall -Wextra -Werror -s -DNDEBUG
+	gcc $(COMMON_FLAGS) -O3 -Werror -flto -s -DNDEBUG
 ```
 
 ## TODO
 
 Remember to keep the scope small!
 
+- Fix pedantic errors
 - File content iterator (no memory allocations)
 - Tools for dealing with `system` and `popen` to run external programs and read their output
