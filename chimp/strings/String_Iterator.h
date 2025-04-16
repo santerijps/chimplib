@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdint.h>
+#include <string.h>
 
 typedef struct String_Iterator_Position String_Iterator_Position;
 struct String_Iterator_Position {
