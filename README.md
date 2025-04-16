@@ -77,6 +77,13 @@ release:
 	gcc -O3 $(REDUCE_SIZE) $(COMMON_FLAGS) -Werror -flto -DNDEBUG
 ```
 
+## Development
+
+Below is the list of tools used in development:
+
+- `gcc` [Home page](https://gcc.gnu.org/)
+- `clangd` [Home page](https://clangd.llvm.org/)
+
 ## TODO
 
 Remember to keep the scope small!
