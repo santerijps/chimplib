@@ -66,11 +66,12 @@ MAKEFLAGS += --silent
 WARNINGS := -Wall -Wextra -Wshadow -Wformat=2 -Wnull-dereference -Wpedantic
 SAFETY := -fstack-protector -D_FORTIFY_SOURCE=2 -fno-strict-aliasing
 COMMON_FLAGS := $(WARNINGS) $(SAFETY) -std=c99
+REDUCE_SIZE := -s -Wl,--gc-sections -fdata-sections -ffunction-sections
 
 debug:
-	gcc $(COMMON_FLAGS) -Og -g
+	gcc -Og -g $(COMMON_FLAGS)
 release:
-	gcc $(COMMON_FLAGS) -O3 -Werror -flto -s -DNDEBUG
+	gcc -O3 $(REDUCE_SIZE) $(COMMON_FLAGS) -Werror -flto -DNDEBUG
 ```
 
 ## TODO
