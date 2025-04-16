@@ -50,7 +50,7 @@ Change `clangd` features by having a `.clangd` file in the root of your project:
 CompileFlags:
     Add:
         - "-Ichimplib" # Add chimplib to search path
-		- "-xc" # Language is C
+        - "-xc" # Language is C
         - "-std=c99" # C standard to adhere to
         - "-Wpedantic" # Warn in case non-standard features are used
 Diagnostics:
