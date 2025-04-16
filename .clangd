@@ -1,3 +1,9 @@
+CompileFlags:
+    Add:
+        - "-xc"
+        - "-std=c99"
+        - "-Wpedantic"
+
 Diagnostics:
     Suppress:
         - misc-definitions-in-headers

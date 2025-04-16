@@ -42,9 +42,9 @@
 //  PRINTING
 //
 
-#define TERM_FPRINTF(graphics_literal, file, format, args...)\
-    fprintf(file, TERMS_GRAPHICS_BEGIN graphics_literal TERMS_GRAPHICS_END format "\e[0m", ## args)
-#define TERM_PRINTF(graphics_literal, format, args...) TERM_FPRINTF(graphics_literal, stdout, format, ## args)
+#define TERM_FPRINTF(graphics_literal, file, format, ...)\
+    fprintf(file, TERMS_GRAPHICS_BEGIN graphics_literal TERMS_GRAPHICS_END format "\033[0m", ## __VA_ARGS__)
+#define TERM_PRINTF(graphics_literal, format, ...) TERM_FPRINTF(graphics_literal, stdout, format, ## __VA_ARGS__)
 
 #define TERM_FWRITE(file, string, size) fwrite(string, 1, size, file)
 #define TERM_WRITE(string, size) TERM_FWRITE(stdout, string, size)
@@ -56,9 +56,9 @@
 //  GRAPHICS
 //
 
-#define TERMS_GRAPHICS_BEGIN "\e[255"
+#define TERMS_GRAPHICS_BEGIN "\033[255"
 #define TERMS_GRAPHICS_END "m"
-#define TERMS_GRAPHICS_RESET "\e[0m"
+#define TERMS_GRAPHICS_RESET "\033[0m"
 
 #define TERMS_DEFAULT ";0"
 #define TERMS_BOLD ";1"
@@ -112,18 +112,18 @@
 //  OTHER
 //
 
-#define TERMS_WINDOW_TITLE_SET(title) "\e]0;" title "\x07"
+#define TERMS_WINDOW_TITLE_SET(title) "\033]0;" title "\x07"
 
-#define TERMS_ALT_BUFFER_ENABLE "\e[?1049h"
-#define TERMS_ALT_BUFFER_DISABLE "\e[?1049l"
+#define TERMS_ALT_BUFFER_ENABLE "\033[?1049h"
+#define TERMS_ALT_BUFFER_DISABLE "\033[?1049l"
 
-#define TERMS_CLEAR_AFTER_CURSOR "\e[0J"
-#define TERMS_CLEAR_BEFORE_CURSOR "\e[1J"
-#define TERMS_CLEAR "\e[2J"
+#define TERMS_CLEAR_AFTER_CURSOR "\033[0J"
+#define TERMS_CLEAR_BEFORE_CURSOR "\033[1J"
+#define TERMS_CLEAR "\033[2J"
 
-#define TERMS_CLEAR_LINE_AFTER_CURSOR "\e[0K"
-#define TERMS_CLEAR_LINE_BEFORE_CURSOR "\e[1K"
-#define TERMS_CLEAR_LINE "\e[2K"
+#define TERMS_CLEAR_LINE_AFTER_CURSOR "\033[0K"
+#define TERMS_CLEAR_LINE_BEFORE_CURSOR "\033[1K"
+#define TERMS_CLEAR_LINE "\033[2K"
 
 #define TERM_CLEAR_AFTER_CURSOR() TERM_WRITE_LITERAL(TERMS_CLEAR_AFTER_CURSOR)
 #define TERM_CLEAR_BEFORE_CURSOR() TERM_WRITE_LITERAL(TERMS_CLEAR_BEFORE_CURSOR)
@@ -137,26 +137,26 @@
 //  CURSOR
 //
 
-#define TERMS_CURSOR_POS_HOME "\e[H"
-#define TERMS_CURSOR_POS_SET(line, column) "\e[" # line ";" # column "H"
+#define TERMS_CURSOR_POS_HOME "\033[H"
+#define TERMS_CURSOR_POS_SET(line, column) "\033[" # line ";" # column "H"
 
-#define TERMS_CURSOR_MOVE_UP(n) "\e[" # n "A"
-#define TERMS_CURSOR_MOVE_DOWN(n) "\e[" # n "B"
-#define TERMS_CURSOR_MOVE_RIGHT(n) "\e[" # n "C"
-#define TERMS_CURSOR_MOVE_LEFT(n) "\e[" # n "D"
+#define TERMS_CURSOR_MOVE_UP(n) "\033[" # n "A"
+#define TERMS_CURSOR_MOVE_DOWN(n) "\033[" # n "B"
+#define TERMS_CURSOR_MOVE_RIGHT(n) "\033[" # n "C"
+#define TERMS_CURSOR_MOVE_LEFT(n) "\033[" # n "D"
 
-#define TERMS_CURSOR_MOVE_DOWN_HOME(n) "\e[" # n "E"
-#define TERMS_CURSOR_MOVE_UP_HOME(n) "\e[" # n "F"
+#define TERMS_CURSOR_MOVE_DOWN_HOME(n) "\033[" # n "E"
+#define TERMS_CURSOR_MOVE_UP_HOME(n) "\033[" # n "F"
 
-#define TERMS_CURSOR_COLUMN_SET(n) "\e[" # n "G"
+#define TERMS_CURSOR_COLUMN_SET(n) "\033[" # n "G"
 
-#define TERMS_CURSOR_MOVE_UP_SCROLL "\eM"
+#define TERMS_CURSOR_MOVE_UP_SCROLL "\033M"
 
-#define TERMS_CURSOR_SAVE "\e7" // or s
-#define TERMS_CURSOR_RESTORE "\e8" // or u
+#define TERMS_CURSOR_SAVE "\0337" // or s
+#define TERMS_CURSOR_RESTORE "\0338" // or u
 
-#define TERMS_CURSOR_HIDE "\e[?25l"
-#define TERMS_CURSOR_SHOW "\e[?25h"
+#define TERMS_CURSOR_HIDE "\033[?25l"
+#define TERMS_CURSOR_SHOW "\033[?25h"
 
 #define TERM_CURSOR_POS_HOME() TERM_WRITE_LITERAL(TERMS_CURSOR_POS_HOME)
 #define TERM_CURSOR_POS_SET(line, column) TERM_WRITE_LITERAL(TERMS_CURSOR_POS_SET(line, columns))

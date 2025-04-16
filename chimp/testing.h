@@ -10,9 +10,9 @@
     #undef assert_equal
     #undef assert_equal_string
 
-    #define _ASSERTF_FORMAT "%s:%d:%s \e[31mFAIL\e[0m Assertion failed: %s\n"
-    #define _ASSERT_EQUAL_FORMAT "%s:%d:%s \e[31mFAIL\e[0m Expected %s to be %lld, got %lld\n"
-    #define _ASSERT_EQUAL_STRING_FORMAT "%s:%d:%s \e[31mFAIL\e[0m Expected %s to be \"%s\", got \"%s\"\n"
+    #define _ASSERTF_FORMAT "%s:%d:%s \033[31mFAIL\033[0m Assertion failed: %s\n"
+    #define _ASSERT_EQUAL_FORMAT "%s:%d:%s \033[31mFAIL\033[0m Expected %s to be %lld, got %lld\n"
+    #define _ASSERT_EQUAL_STRING_FORMAT "%s:%d:%s \033[31mFAIL\033[0m Expected %s to be \"%s\", got \"%s\"\n"
 
     #define assert(expr) assertf(expr, "\r")
 
@@ -29,8 +29,8 @@
 
     #define assert_equal(actual, expected)                      \
         do {                                                    \
-            __auto_type a = (int64_t)(actual);                  \
-            __auto_type b = (int64_t)(expected);                \
+            int64_t a = (int64_t)(actual);                      \
+            int64_t b = (int64_t)(expected);                    \
             if (a != b) {                                       \
                 fprintf(                                        \
                     stderr,                                     \
@@ -43,8 +43,8 @@
 
     #define assert_equal_string(actual, expected)               \
         do {                                                    \
-            __auto_type a = (char*)(actual);                    \
-            __auto_type b = (char*)(expected);                  \
+            char* a = (char*)(actual);                          \
+            char* b = (char*)(expected);                        \
             if (strcmp(a, b) != 0) {                            \
                 fprintf(                                        \
                     stderr,                                     \

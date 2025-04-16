@@ -1,6 +1,8 @@
 #ifndef LIBCHIMP_TYPES_H
 #define LIBCHIMP_TYPES_H
 
+#include <stdint.h>
+
 typedef signed char i8;
 typedef signed short i16;
 typedef signed int i32;

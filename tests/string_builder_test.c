@@ -47,8 +47,8 @@ int main(void) {
     );
     fprintf(
         stderr,
-        __FILE__ " %sFailed tests: %d\n\e[0m",
-        failures ? "\e[31m" : "\e[32m", failures
+        __FILE__ " %sFailed tests: %d\n\033[0m",
+        failures ? "\033[31m" : "\033[32m", failures
     );
     return 0;
 }

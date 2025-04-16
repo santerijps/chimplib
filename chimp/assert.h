@@ -3,8 +3,6 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #define assume(expr) do if (!(expr)) return 1; while (0)
 #define assumef(expr, ...) do if(!(expr)) { fprintf(stderr, __VA_ARGS__); return 1; } while (0)
@@ -25,8 +23,8 @@
 
     #define assert_equal(actual, expected)\
         do {                                                                                \
-            __auto_type a = (int64_t)(actual);                                              \
-            __auto_type b = (int64_t)(expected);                                            \
+            int64_t a = (int64_t)(actual);                                                  \
+            int64_t b = (int64_t)(expected);                                                \
             if (a != b) {                                                                   \
                 fprintf(                                                                    \
                     stderr,                                                                 \
@@ -39,8 +37,8 @@
 
     #define assert_equal_string(actual, expected)                                               \
         do {                                                                                    \
-            __auto_type a = (char*)(actual);                                                    \
-            __auto_type b = (char*)(expected);                                                  \
+            char* a = (char*)(actual);                                                          \
+            char* b = (char*)(expected);                                                        \
             if (strcmp(a, b) != 0) {                                                            \
                 fprintf(                                                                        \
                     stderr,                                                                     \
